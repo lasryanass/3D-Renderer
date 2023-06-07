@@ -1,10 +1,10 @@
-#ifndef __IMAGE_HPP__
-#define __IMAGE_HPP__
+#ifndef __IMAGE_H__
+#define __IMAGE_H__
 
 #include <fstream>
 
 #pragma pack(push,1)
-struct Header {
+struct TGA_Header {
 	char idlength;
 	char colormaptype;
 	char datatypecode;
@@ -22,7 +22,7 @@ struct Header {
 
 
 
-struct Color {
+struct TGAColor {
 	union {
 		struct {
 			unsigned char b, g, r, a;
@@ -32,25 +32,25 @@ struct Color {
 	};
 	int bytespp;
 
-	Color() : val(0), bytespp(1) {
+	TGAColor() : val(0), bytespp(1) {
 	}
 
-	Color(unsigned char R, unsigned char G, unsigned char B, unsigned char A) : b(B), g(G), r(R), a(A), bytespp(4) {
+	TGAColor(unsigned char R, unsigned char G, unsigned char B, unsigned char A) : b(B), g(G), r(R), a(A), bytespp(4) {
 	}
 
-	Color(int v, int bpp) : val(v), bytespp(bpp) {
+	TGAColor(int v, int bpp) : val(v), bytespp(bpp) {
 	}
 
-	Color(const Color &c) : val(c.val), bytespp(c.bytespp) {
+	TGAColor(const TGAColor &c) : val(c.val), bytespp(c.bytespp) {
 	}
 
-	Color(const unsigned char *p, int bpp) : val(0), bytespp(bpp) {
+	TGAColor(const unsigned char *p, int bpp) : val(0), bytespp(bpp) {
 		for (int i=0; i<bpp; i++) {
 			raw[i] = p[i];
 		}
 	}
 
-	Color & operator =(const Color &c) {
+	TGAColor & operator =(const TGAColor &c) {
 		if (this != &c) {
 			bytespp = c.bytespp;
 			val = c.val;
@@ -60,7 +60,7 @@ struct Color {
 };
 
 
-class Image {
+class TGAImage {
 protected:
 	unsigned char* data;
 	int width;
@@ -74,18 +74,18 @@ public:
 		GRAYSCALE=1, RGB=3, RGBA=4
 	};
 
-	Image();
-	Image(int w, int h, int bpp);
-	Image(const Image &img);
-	bool read_ima_file(const char *filename);
-	bool write_ima_file(const char *filename, bool rle=true);
+	TGAImage();
+	TGAImage(int w, int h, int bpp);
+	TGAImage(const TGAImage &img);
+	bool read_tga_file(const char *filename);
+	bool write_tga_file(const char *filename, bool rle=true);
 	bool flip_horizontally();
 	bool flip_vertically();
 	bool scale(int w, int h);
-	Color get(int x, int y);
-	bool set(int x, int y, Color c);
-	~Image();
-	Image & operator =(const Image &img);
+	TGAColor get(int x, int y);
+	bool set(int x, int y, TGAColor c);
+	~TGAImage();
+	TGAImage & operator =(const TGAImage &img);
 	int get_width();
 	int get_height();
 	int get_bytespp();
@@ -93,4 +93,4 @@ public:
 	void clear();
 };
 
-#endif //__IMAGE_HPP__
+#endif //__IMAGE_H__
