@@ -172,7 +172,5 @@ int main(int argc, char **argv)
 
   triangulateObjFile(inputPath, outputPath);
 
-  std::cout << "Triangulation completed!" << std::endl;
-
   return 0;
 }

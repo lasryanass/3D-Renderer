@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     }
 
     image.flip_vertically();
-    image.write_tga_file("./outputs/lines.tga");
+    image.write_tga_file("lines.tga");
     delete model;
     return 0;
 }

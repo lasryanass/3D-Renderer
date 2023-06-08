@@ -1,5 +1,7 @@
 #include <vector>
 #include <cmath>
+#include <ctime>
+#include <iostream>
 #include "../lib/imageFormat/tgaimage.h"
 #include "../lib/model/model.h"
 #include "../lib/geometry/geometry.h"
@@ -10,11 +12,12 @@ const TGAColor white = TGAColor(255, 255, 255, 255);
 const TGAColor red = TGAColor(255, 0, 0, 255);
 const TGAColor green = TGAColor(0, 255, 0, 255);
 Model *model = NULL;
-const int width = 800;
-const int height = 800;
+const int width = 1600;
+const int height = 1600;
 
 int main(int argc, char **argv)
 {
+  static clock_t startTime = clock();
 
   model = new Model(argv[1]);
 
@@ -39,9 +42,10 @@ int main(int argc, char **argv)
       triangle(screen_coords[0], screen_coords[1], screen_coords[2], image, TGAColor(intensity * 255, intensity * 255, intensity * 255, 255));
     }
   }
-
+  clock_t endTime = clock();
+  std::cout << "Time: " << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << std::endl;
   image.flip_vertically();
-  image.write_tga_file("./outputs/rasterized.tga");
+  image.write_tga_file("rasterized.tga");
   delete model;
   return 0;
 }
