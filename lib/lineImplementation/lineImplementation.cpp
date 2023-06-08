@@ -19,7 +19,6 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color)
   // int dx = x1-x0;
   // int dy = y1-y0;
   // float slope = abs(dy/float(dx));
-  // //distance to the best straight line from our current (x, y)
   // float error = 0;
   // int y = y0;
   // for (int x=x0; x<=x1; x++) {
@@ -71,7 +70,6 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color)
       }
       for (int y = y0; y <= y1; y++)
       {
-        // fast round
         int x = (int)(x0 + (y - y0) * slope + 0.5f);
         image.set(x, y, color);
       }
@@ -80,7 +78,6 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color)
     {
       for (int x = x0; x <= x1; x++)
       {
-        // fast round
         int y = (int)(y0 + (x - x0) * slope + 0.5f);
         image.set(x, y, color);
       }

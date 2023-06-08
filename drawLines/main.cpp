@@ -13,14 +13,7 @@ const int height = 800;
 
 int main(int argc, char **argv)
 {
-    if (2 == argc)
-    {
-        model = new Model(argv[1]);
-    }
-    else
-    {
-        model = new Model("../3d-models/airplane.obj");
-    }
+    model = new Model(argv[1]);
 
     TGAImage image(width, height, TGAImage::RGB);
     for (int i = 0; i < model->nfaces(); i++)
@@ -39,7 +32,7 @@ int main(int argc, char **argv)
     }
 
     image.flip_vertically();
-    image.write_tga_file("../outputs/lines.tga");
+    image.write_tga_file("./outputs/lines.tga");
     delete model;
     return 0;
 }

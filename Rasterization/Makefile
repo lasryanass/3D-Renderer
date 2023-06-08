@@ -4,7 +4,7 @@ LDFLAGS      =
 LIBS         = -lm
 
 DESTDIR = ./
-TARGET  = main
+TARGET  = rasterize
 
 EXTERNAL_DIR = ../lib
 
@@ -12,6 +12,7 @@ CPPFLAGS += -I$(EXTERNAL_DIR)/imageformat
 CPPFLAGS += -I$(EXTERNAL_DIR)/model
 CPPFLAGS += -I$(EXTERNAL_DIR)/geometry
 CPPFLAGS += -I$(EXTERNAL_DIR)/lineImplementation
+CPPFLAGS += -I$(EXTERNAL_DIR)/triangleImplementation
 
 OBJECTS := $(patsubst %.cpp,%.o,$(wildcard $(EXTERNAL_DIR)/*/*.cpp)) main.o
 

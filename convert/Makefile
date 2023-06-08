@@ -4,16 +4,10 @@ LDFLAGS      =
 LIBS         = -lm
 
 DESTDIR = ./
-TARGET  = drawLine
+TARGET  = convert
 
-EXTERNAL_DIR = ../lib
 
-CPPFLAGS += -I$(EXTERNAL_DIR)/imageformat
-CPPFLAGS += -I$(EXTERNAL_DIR)/model
-CPPFLAGS += -I$(EXTERNAL_DIR)/geometry
-CPPFLAGS += -I$(EXTERNAL_DIR)/lineImplementation
-
-OBJECTS := $(patsubst %.cpp,%.o,$(wildcard $(EXTERNAL_DIR)/*/*.cpp)) main.o
+OBJECTS := $(patsubst %.cpp,%.o,$(wildcard $(EXTERNAL_DIR)/*/*.cpp)) convert.o
 
 all: $(DESTDIR)$(TARGET)
 
@@ -23,7 +17,7 @@ $(DESTDIR)$(TARGET): $(OBJECTS)
 $(OBJECTS): %.o: %.cpp
 	$(SYSCONF_LINK) -Wall $(CPPFLAGS) -c $(CFLAGS) $< -o $@
 
-main.o: main.cpp
+convert.o: convert.cpp
 	$(SYSCONF_LINK) -Wall $(CPPFLAGS) -c $(CFLAGS) $< -o $@
 
 clean:
